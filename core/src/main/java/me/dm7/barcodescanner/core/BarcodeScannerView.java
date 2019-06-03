@@ -273,12 +273,12 @@ public abstract class BarcodeScannerView extends FrameLayout implements Camera.P
             Camera.Parameters parameters = mCameraWrapper.mCamera.getParameters();
             int zomLevel = CameraUtils.indexOfClosestZoom(parameters, targetZoomRatio);
             if (zomLevel !=  parameters.getZoom()) {
-                if (parameters.isZoomSupported()) {
-                    mCameraWrapper.mCamera.startSmoothZoom(zomLevel);
-                } else {
-                    parameters.setZoom(zomLevel);
+//                if (parameters.isZoomSupported()) {
+//                    mCameraWrapper.mCamera.startSmoothZoom(zomLevel);
+//                } else {
+                parameters.setZoom(zomLevel);
                     mCameraWrapper.mCamera.setParameters(parameters);
-                }
+//                }
             }
         }
     }
