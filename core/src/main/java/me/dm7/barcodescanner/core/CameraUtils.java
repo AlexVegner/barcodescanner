@@ -64,30 +64,13 @@ public class CameraUtils {
         return true;
     }
 
-    public static void setZoom(Camera.Parameters parameters, double targetZoomRatio) {
-        if (parameters.isZoomSupported()) {
-            Integer zoom = indexOfClosestZoom(parameters, targetZoomRatio);
-            if (zoom == null) {
-                return;
-            }
-            if (parameters.getZoom() == zoom) {
-                Log.i(TAG, "Zoom is already set to " + zoom);
-            } else {
-                Log.i(TAG, "Setting zoom to " + zoom);
-                parameters.setZoom(zoom);
-            }
-        } else {
-            Log.i(TAG, "Zoom is not supported");
-        }
-    }
-
-    private static Integer indexOfClosestZoom(Camera.Parameters parameters, double targetZoomRatio) {
+    public static Integer indexOfClosestZoom(Camera.Parameters parameters, double targetZoomRatio) {
         List<Integer> ratios = parameters.getZoomRatios();
         Log.i(TAG, "Zoom ratios: " + ratios);
         int maxZoom = parameters.getMaxZoom();
         if (ratios == null || ratios.isEmpty() || ratios.size() != maxZoom + 1) {
             Log.w(TAG, "Invalid zoom ratios!");
-            return null;
+            return 0;
         }
         double target100 = 100.0 * targetZoomRatio;
         double smallestDiff = Double.POSITIVE_INFINITY;
