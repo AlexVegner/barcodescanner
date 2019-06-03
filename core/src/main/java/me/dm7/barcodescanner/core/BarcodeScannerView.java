@@ -35,6 +35,7 @@ public abstract class BarcodeScannerView extends FrameLayout implements Camera.P
     private float mBorderAlpha = 1.0f;
     private int mViewFinderOffset = 0;
     private float mAspectTolerance = 0.1f;
+    private double mTargetZoomRatio = 1.0f;
 
     public BarcodeScannerView(Context context) {
         super(context);
@@ -264,6 +265,18 @@ public abstract class BarcodeScannerView extends FrameLayout implements Camera.P
             }
             mCameraWrapper.mCamera.setParameters(parameters);
         }
+    }
+
+    public void setZoom(double targetZoomRatio) {
+        mTargetZoomRatio = targetZoomRatio;
+        if(mCameraWrapper != null) {
+            Camera.Parameters parameters = mCameraWrapper.mCamera.getParameters();
+            CameraUtils.setZoom(parameters, targetZoomRatio);
+        }
+    }
+
+    public double getZoom() {
+        return mTargetZoomRatio;
     }
 
     public boolean getFlash() {
