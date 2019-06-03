@@ -174,6 +174,10 @@ public class ZXingScannerView extends BarcodeScannerView {
         }
     }
 
+    public void test() {
+        
+    }
+
     public void resumeCameraPreview(ResultHandler resultHandler) {
         mResultHandler = resultHandler;
         super.resumeCameraPreview();
